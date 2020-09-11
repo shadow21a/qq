@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head> 
+  <title>Document</title> 
+  <script typet="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script> 
+  <script type="text/javascript">
+//判断一个url是否可以访问
+function IsLoad(_url,fun){
+  $.ajax({
+      url:_url,
+      cache: false,
+      type:"get",
+      data:"",
+      success:function(){
+        //说明请求的url存在，并且可以访问
+        if($.isFunction(fun)){
+                    window.location.href=_url;
+              }
+      },
+      statusCode:{
+        500:function(){
+          //说明请求的url不存在
+          if($.isFunction(fun)){
+    
+            fun(false);
+          }
+        }
+      }
+    });
+}
+//调用
+var url2;
+url = 'http://video.mansuo.net:8083/m3u8.php?sn=692316457&channel=0&type=live'
+IsLoad(url,function(res){
+    if(res){
+          url2 =url ;
+
+    }})
+
+url = 'http://video1.mansuo.net:8083/m3u8.php?sn=692316457&channel=0&type=live'
+IsLoad(url,function(res2){
+        if(res2){
+        url2 =url;
+
+    }
+    })
+
+url = 'http://video2.mansuo.net:8083/m3u8.php?sn=692316457&channel=0&type=live'
+        IsLoad(url,function(res3){
+                if(res3){
+            
+            url2 =url ;
+
+            }
+        });
+
+    </script> 
+ </head> 
+ <body>  
+ </body>
+</html>
